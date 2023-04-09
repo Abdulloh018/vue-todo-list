@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-list">
-    <todoItem v-for="item in items" :key="item.id" :item="item" @updateTodo="updateTodo" @deleteTodo="deleteTodo"></todoItem>
+    <todoItem v-for="item in items" :key="item.id" :item="item"></todoItem>
   </ul>
 </template>
 <script>
@@ -16,16 +16,6 @@ export default {
       required: true
     }
   },
-
-  methods: {
-    updateTodo(todo) {
-      this.$emit('updateTodo', todo)
-    },
-
-    deleteTodo(todo) {
-      this.$emit('deleteTodo', todo)
-    }
-  }
 }
 </script>
 <style scoped>

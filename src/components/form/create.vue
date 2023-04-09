@@ -1,5 +1,5 @@
 <template>
-  <div class="form" @submit.prevent="createTodo">
+  <div class="form" @submit.prevent="createTodoItem">
     <h2 class="form__title">~ Today I need to ~</h2>
     <form>
       <input
@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: "todoCreate",
   data() {
@@ -23,9 +24,15 @@ export default {
     };
   },
   methods: {
-    createTodo() {
+    ...mapActions(['createTodo']),
+    createTodoItem() {
       if (this.inputValue !== "") {
-        this.$emit('create', this.inputValue)
+        const requestData = {
+        name: this.inputValue,
+        completed: false
+      }
+      this.createTodo(requestData)
+      this.inputValue = ''
       }
     },
   },

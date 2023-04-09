@@ -5,10 +5,11 @@
       <span v-show="todoItem.completed" class="checkbox-btn__icon">+</span>
     </div>
     <span class="todo__content">{{ todoItem.name }}</span
-    ><button @click="deleteTodo" class="todo__deleteBtn">+</button>
+    ><button @click="deleteTodoItem" class="todo__deleteBtn">+</button>
   </li>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: "todoItem",
   props: {
@@ -23,12 +24,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['updateTodo','deleteTodo']),
+
     completedIcon() {
       this.todoItem.completed = !this.todoItem.completed 
-      this.$emit('updateTodo', this.todoItem)
+      this.updateTodo(this.todoItem)
     },
-    deleteTodo() {
-      this.$emit('deleteTodo', this.todoItem)
+
+    deleteTodoItem() {
+      this.deleteTodo(this.todoItem)
     }
   }
 };
